@@ -1,5 +1,5 @@
 import Vapor
-import FluentSQLite
+import FluentPostgreSQL
 
 final class Acronym: Codable {
     var id: Int?
@@ -12,11 +12,11 @@ final class Acronym: Codable {
     }
 }
 
-// Conformidade com database sqlite com ID:Int?
-extension Acronym: SQLiteModel {}
+// Conformidade com database com ID:Int?
+extension Acronym: PostgreSQLModel {}
 
 // Conformidade com Migration para criação da tabela no database
 extension Acronym: Migration {}
 
-// Conformidade com Content para permitir conversão dos dados JSON <-> Model
+// Conformidade com Content para permitir conversão dos dados JSON <-> Model com .encode() e .decode()
 extension Acronym: Content {}
