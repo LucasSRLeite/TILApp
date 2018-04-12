@@ -20,3 +20,5 @@ extension Acronym: Migration {}
 
 // Conformidade com Content para permitir conversão dos dados JSON <-> Model com .encode() e .decode()
 extension Acronym: Content {}
+
+extension Acronym: Parameter {}
