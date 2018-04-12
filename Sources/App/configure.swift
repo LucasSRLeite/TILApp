@@ -9,10 +9,6 @@ public func configure(
     _ env: inout Environment,
     _ services: inout Services
 ) throws {
-    var commandConfig = CommandConfig.default()
-    commandConfig.use(RevertCommand.self, as: "revert")
-    services.register(commandConfig)
-    
     /// Register providers first
     try services.register(FluentPostgreSQLProvider())
 
@@ -20,6 +16,10 @@ public func configure(
     let router = EngineRouter.default()
     try routes(router)
     services.register(router, as: Router.self)
+    
+    var commandConfig = CommandConfig.default()
+    commandConfig.use(RevertCommand.self, as: "revert")
+    services.register(commandConfig)
 
     /// Register middleware
     var middlewares = MiddlewareConfig() // Create _empty_ middleware config
