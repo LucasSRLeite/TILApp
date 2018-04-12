@@ -11,6 +11,10 @@ final class Acronym: Codable {
         return parent(\.userID)
     }
     
+    var categories: Siblings<Acronym, Category, AcronymCategoryPivot> {
+        return siblings()
+    }
+    
     init(short: String, long: String, userID: User.ID) {
         self.short = short
         self.long = long
