@@ -9,6 +9,10 @@ public func configure(
     _ env: inout Environment,
     _ services: inout Services
 ) throws {
+    var commandConfig = CommandConfig.default()
+    commandConfig.use(RevertCommand.self, as: "revert")
+    services.register(commandConfig)
+    
     /// Register providers first
     try services.register(FluentPostgreSQLProvider())
 
@@ -37,6 +41,7 @@ public func configure(
 
     /// Configure migrations
     var migrations = MigrationConfig()
+    migrations.add(model: User.self, database: .psql)
     migrations.add(model: Acronym.self, database: .psql)
     services.register(migrations)
 
