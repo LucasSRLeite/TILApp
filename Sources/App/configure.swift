@@ -16,10 +16,6 @@ public func configure(
     let router = EngineRouter.default()
     try routes(router)
     services.register(router, as: Router.self)
-    
-    var commandConfig = CommandConfig.default()
-    commandConfig.use(RevertCommand.self, as: "revert")
-    services.register(commandConfig)
 
     /// Register middleware
     var middlewares = MiddlewareConfig() // Create _empty_ middleware config
@@ -45,4 +41,7 @@ public func configure(
     migrations.add(model: Acronym.self, database: .psql)
     services.register(migrations)
 
+    var commandConfig = CommandConfig.default()
+    commandConfig.use(RevertCommand.self, as: "revert")
+    services.register(commandConfig)
 }
